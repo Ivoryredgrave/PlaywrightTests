@@ -1,0 +1,15 @@
+{
+  "name": "PlaywrightTests",
+  "version": "1.0.0",
+  "description": "Playwright Framework with Typescript",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test"
+  },
+  "keywords": [],
+  "author": "Ivoryredgrave",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.25.2",
+    "typescript": "^4.8.2"
+  }}
