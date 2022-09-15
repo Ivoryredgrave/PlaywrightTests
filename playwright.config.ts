@@ -2,7 +2,7 @@ import type { PlaywrightTestConfig } from "@playwright/test";
 import { devices } from "@playwright/test";
 
 const config: PlaywrightTestConfig = {
-  testDir: "./tests",
+  testDir: "./src/tests",
   timeout: 30 * 1000,
   expect: {
     timeout: 5000,
@@ -13,7 +13,7 @@ const config: PlaywrightTestConfig = {
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
   reporter: "html",
-  
+
   use: {
     actionTimeout: 0,
     trace: "on-first-retry",
@@ -26,7 +26,6 @@ const config: PlaywrightTestConfig = {
         ...devices["Desktop Chrome"],
       },
     },
-
     {
       name: "firefox",
       use: {
