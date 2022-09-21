@@ -1,17 +1,18 @@
 // @ts-check
 import { test } from "@playwright/test";
-import { SubirArchivo } from "../componentes/componentes";
+import { SubirArchivo, AbrirPagina, Boton } from "../componentes/componentes";
 
 test.describe("Upload File", async () => {
-  const filePath0 = "../imagenes/conejos.jpg";
-
   test.slow();
 
+  const filePath0 = "../imagenes/conejos.jpg";
+
   test.beforeEach(async ({ page }) => {
-    await page.goto("https://kitchen.applitools.com/ingredients/file-picker");
+    await AbrirPagina(page, process.env.THE_INTERNET_URL + "/upload");
   });
 
   test("Test Upload File", async ({ page }) => {
-    SubirArchivo(page, "#photo-upload", filePath0);
+    await SubirArchivo(page, "#file-upload", filePath0);
+    await Boton(page, "#file-submit");
   });
 });

@@ -16,7 +16,6 @@ const IniciarSesion = async (
   await page.locator(InputUsuario).fill(TextoUsuario);
   await page.locator(InputClave).fill(TextoClave);
   await page.locator(Boton).click();
-  await page.context().storageState({ path: "../storageState.json" });
 };
 
 const ModalAlerta = async (
@@ -37,25 +36,47 @@ const SubirArchivo = async (
   await page.setInputFiles(BotonArchivo, RutaArchivo);
 };
 
-const Boton = async (page: Page, Boton: string) => {
+const Boton = async (
+  page: Page, 
+  Boton: string
+  ) => {
   await expect(page.locator(Boton)).toBeVisible();
   await page.locator(Boton).click();
 };
 
-const Input = async (page: Page, Input: string, Texto: string) => {
+const Input = async (
+  page: Page, 
+  Input: string, 
+  Texto: string
+  ) => {
   await expect(page.locator(Input)).toBeVisible();
   await page.locator(Input).fill(Texto);
 };
 
-const Checkbox = async (page: Page, checkbox: string) => {
+const Checkbox = async (
+  page: Page, 
+  checkbox: string
+  ) => {
   await expect(page.locator(checkbox)).toBeVisible();
   await page.locator(checkbox).check();
   expect(await page.locator(checkbox).isChecked()).toBeTruthy();
 };
 
-const Select = async (page: Page, select: string, valor: string) => {
+const Select = async (
+  page: Page, 
+  select: string, 
+  valor: string
+  ) => {
   await expect(page.locator(select)).toBeVisible();
   await page.locator(select).selectOption(valor);
+};
+
+const AbrirPagina = async (
+  page: Page, 
+  url: string, 
+  ) => {
+    await page.goto(url);
+    expect(page.url()).toBe(url);
 };
 
 export {
@@ -66,4 +87,5 @@ export {
   Input,
   Checkbox,
   Select,
+  AbrirPagina
 };

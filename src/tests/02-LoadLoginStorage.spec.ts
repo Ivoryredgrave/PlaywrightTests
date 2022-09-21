@@ -1,17 +1,13 @@
 // @ts-check
-import { test, expect } from "@playwright/test";
+import { test } from "@playwright/test";
+import { AbrirPagina } from "../componentes/componentes";
 
 test.describe("Load Login Storage", async () => {
-  
   test.slow();
 
-  test.use({ storageState: "../storageState.json" });
-
-  test.beforeEach(async ({ page }) => {
-    await page.goto("url");
-  });
+  test.use({ storageState: "./storageState.json" });
 
   test("Test Login Storage", async ({ page }) => {
-    await expect(page).toHaveURL("url");
+    await AbrirPagina(page, process.env.THE_INTERNET_URL + "/secure");
   });
 });

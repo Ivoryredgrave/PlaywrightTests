@@ -1,5 +1,8 @@
+import * as dotenv from "dotenv";
 import type { PlaywrightTestConfig } from "@playwright/test";
 import { devices } from "@playwright/test";
+
+dotenv.config({ path: "./.env.development" });
 
 const config: PlaywrightTestConfig = {
   testDir: "./src/tests",
@@ -8,17 +11,16 @@ const config: PlaywrightTestConfig = {
     timeout: 5000,
   },
 
-  fullyParallel: true,
+  fullyParallel: false,
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
+  retries: 0,
+  workers: 1,
   reporter: "html",
-
   use: {
     actionTimeout: 0,
+    //baseURL: 'https://letcode.in/',
     trace: "on-first-retry",
   },
-
   projects: [
     {
       name: "chromium",
@@ -26,12 +28,48 @@ const config: PlaywrightTestConfig = {
         ...devices["Desktop Chrome"],
       },
     },
-    {
-      name: "firefox",
-      use: {
-        ...devices["Desktop Firefox"],
-      },
-    },
+
+    // {
+    //   name: 'firefox',
+    //   use: {
+    //     ...devices['Desktop Firefox'],
+    //   },
+    // },
+
+    // {
+    //   name: 'webkit',
+    //   use: {
+    //     ...devices['Desktop Safari'],
+    //   },
+    // },
+
+    /* Test against mobile viewports. */
+    // {
+    //   name: 'Mobile Chrome',
+    //   use: {
+    //     ...devices['Pixel 5'],
+    //   },
+    // },
+    // {
+    //   name: 'Mobile Safari',
+    //   use: {
+    //     ...devices['iPhone 12'],
+    //   },
+    // },
+
+    /* Test against branded browsers. */
+    // {
+    //   name: 'Microsoft Edge',
+    //   use: {
+    //     channel: 'msedge',
+    //   },
+    // },
+    // {
+    //   name: 'Google Chrome',
+    //   use: {
+    //     channel: 'chrome',
+    //   },
+    // },
   ],
 };
 
